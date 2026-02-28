@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gulab Jamun 💗</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial;
+      background: #ffe6f0;
+      padding-top: 80px;
+    }
+    button {
+      font-size: 20px;
+      padding: 10px 20px;
+      margin: 10px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+    }
+    #noBtn {
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Will you be my gulab jamun? 🍩</h1>
+
+  <button onclick="yesClicked()">Yes 💕</button>
+  <button id="noBtn" onclick="noClicked()">No 😭</button>
+
+  <p id="message"></p>
+
+  <script>
+    function yesClicked() {
+      document.getElementById("message").innerHTML =
+        "Hehe 😈 then I’ll eat you!";
+    }
+
+    function noClicked() {
+      document.getElementById("message").innerHTML =
+        "Please pookie 🥺💗";
+    }
+  </script>
+
+</body>
+</html>
