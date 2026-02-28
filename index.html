@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Gulab Jamun Question 😋</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #f9c5d1, #d6c1ff);
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+        overflow: hidden;
+    }
+
+    .container {
+        text-align: center;
+        position: relative;
+    }
+
+    h1 {
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+
+    .message-box {
+        min-height: 40px;
+        font-size: 28px;
+        margin-bottom: 25px;
+    }
+
+    .buttons {
+        position: relative;
+        height: 80px;
+    }
+
+    button {
+        font-size: 28px;
+        padding: 10px 25px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        position: absolute;
+        transition: 0.2s ease;
+    }
+
+    #yesBtn {
+        background-color: #4CAF50;
+        color: white;
+        left: 0;
+    }
+
+    #noBtn {
+        background-color: #f44336;
+        color: white;
+        right: 0;
+    }
+
+    /* Hearts & confetti */
+    .heart, .confetti {
+        position: fixed;
+        font-size: 20px;
+        animation: floatUp 3s linear forwards;
+        pointer-events: none;
+    }
+
+    .confetti {
+        width: 10px;
+        height: 10px;
+        background: random;
+    }
+
+    @keyframes floatUp {
+        0% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-100vh);
+            opacity: 0;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Will you be my gulab jamun? 😋</h1>
+
+    <div class="message-box" id="message"></div>
+
+    <div class="buttons">
+        <button id="yesBtn">Yes 💚</button>
+        <button id="noBtn">No ❤️</button>
+    </div>
+</div>
+
+<script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const message = document.getElementById("message");
+
+    let noCount = 0;
+    const messages = [
+        "Are you sure? 🙂",
+        "Pakka pookie? 🎀🥺",
+        "Ayusshutupp and yes kro na 🫣"
+    ];
+
+    noBtn.addEventListener("mouseover", () => {
+        const x = Math.random() * 200 - 100;
+        const y = Math.random() * 100 - 50;
+        noBtn.style.transform = `translate(${x}px, ${y}px)`;
+
+        if (noCount < messages.length) {
+            message.innerText = messages[noCount];
+            noCount++;
+        }
+
+        let currentSize = parseInt(window.getComputedStyle(yesBtn).fontSize);
+        yesBtn.style.fontSize = (currentSize + 4) + "px";
+    });
+
+    yesBtn.addEventListener("click", () => {
+        message.innerText = "Aww… can I have you in my dinner? 👻";
+        launchCelebration();
+    });
+
+    function launchCelebration() {
+        for (let i = 0; i < 40; i++) {
+            const heart = document.createElement("div");
+            heart.className = "heart";
+            heart.innerText = "💖";
+            heart.style.left = Math.random() * window.innerWidth + "px";
+            heart.style.top = window.innerHeight + "px";
+            document.body.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 3000);
+
+            const confetti = document.createElement("div");
+            confetti.className = "confetti";
+            confetti.style.left = Math.random() * window.innerWidth + "px";
+            confetti.style.top = window.innerHeight + "px";
+            confetti.style.backgroundColor =
+                `hsl(${Math.random() * 360}, 100%, 70%)`;
+            document.body.appendChild(confetti);
+
+            setTimeout(() => confetti.remove(), 3000);
+        }
+    }
+</script>
+
+</body>
+</html>
