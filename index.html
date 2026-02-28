@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Will You Be My Gulab Jamun?</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #f8cdda, #d1c4e9);
+        font-family: 'Comic Sans MS', cursive;
+        overflow: hidden;
+    }
+
+    .container {
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 36px;
+        margin-bottom: 15px;
+    }
+
+    .message-box {
+        min-height: 60px;
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+
+    .buttons {
+        position: relative;
+        height: 120px;
+        margin-bottom: 20px;
+    }
+
+    button {
+        font-size: 20px;
+        padding: 12px 28px;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        position: absolute;
+    }
+
+    #yesBtn {
+        background-color: #4CAF50;
+        color: white;
+        left: 45%;
+        pointer-events: none;
+        transition: padding 0.3s;
+    }
+
+    #noBtn {
+        background-color: #e53935;
+        color: white;
+        left: 55%;
+    }
+
+    .gif {
+        width: 180px;
+        margin-top: 15px;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Will you be my gulab jamun? 😋</h1>
+
+    <div class="message-box" id="message"></div>
+
+    <div class="buttons">
+        <button id="yesBtn">Yes 😌</button>
+        <button id="noBtn">No 😔</button>
+    </div>
+
+    <!-- GIF will appear here -->
+    <div id="gifContainer"></div>
+</div>
+
+<script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const message = document.getElementById("message");
+    const gifContainer = document.getElementById("gifContainer");
+
+    let noCount = 0;
+
+    const messages = [
+        "Are you sure? 🙂",
+        "Pakka pookie? 🎀🥺",
+        "Ayusshutupp and yes kro na 🫣"
+    ];
+
+    noBtn.addEventListener("mouseover", () => {
+        if (noCount < 3) {
+            const x = Math.random() * 300 - 150;
+            const y = Math.random() * 80 - 40;
+            noBtn.style.transform = `translate(${x}px, ${y}px)`;
+        }
+    });
+
+    noBtn.addEventListener("click", () => {
+        if (noCount < 3) {
+            message.textContent = messages[noCount];
+            noCount++;
+
+            // YES button grows each time
+            yesBtn.style.padding = `${12 + noCount * 6}px ${28 + noCount * 12}px`;
+
+            if (noCount === 3) {
+                yesBtn.style.pointerEvents = "auto";
+            }
+        }
+    });
+
+    yesBtn.addEventListener("click", () => {
+        message.textContent = "Yayyyyyyyyy.. can I have you in my dinner? 👻";
+
+        gifContainer.innerHTML = `
+            <img src="kiss.gif" class="gif" alt="Cute GIF">
+        `;
+    });
+</script>
+
+</body>
+</html>
