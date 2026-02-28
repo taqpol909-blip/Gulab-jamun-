@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Gulab Jamun Proposal 🍩</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    font-family: "Comic Sans MS", cursive;
+    background: linear-gradient(135deg, #f7c6e6, #d6c6ff);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ✨ GLITTER */
+.glitter {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 10px white;
+    animation: float 6s linear forwards;
+    z-index: 1;
+}
+
+@keyframes float {
+    from { transform: translateY(100vh); opacity: 0; }
+    20% { opacity: 1; }
+    to { transform: translateY(-10vh); opacity: 0; }
+}
+
+.container {
+    text-align: center;
+    z-index: 3;
+}
+
+h1 {
+    font-size: 28px;
+}
+
+#messageBox {
+    min-height: 45px;
+    font-size: 22px;
+    margin: 15px;
+}
+
+.buttons {
+    position: relative;
+    height: 150px;
+}
+
+button {
+    font-size: 22px;
+    padding: 12px 30px;
+    border-radius: 12px;
+    border: none;
+    position: absolute;
+    cursor: pointer;
+}
+
+#yesBtn {
+    background: #4CAF50;
+    color: white;
+    left: 25%;
+    top: 60px;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+#noBtn {
+    background: #e74c3c;
+    color: white;
+    left: 55%;
+    top: 60px;
+}
+
+/* 💖 HEARTS */
+.heart {
+    width: 12px;
+    height: 12px;
+    background: hotpink;
+    position: absolute;
+    transform: rotate(45deg);
+    box-shadow: 0 0 15px hotpink;
+    animation: sparkle 1.5s infinite alternate, fall 4s linear forwards;
+    z-index: 2;
+}
+
+.heart::before,
+.heart::after {
+    content: "";
+    width: 12px;
+    height: 12px;
+    background: hotpink;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.heart::before { top: -6px; }
+.heart::after { left: -6px; }
+
+@keyframes sparkle {
+    from { transform: rotate(45deg) scale(1); }
+    to { transform: rotate(45deg) scale(1.4); }
+}
+
+@keyframes fall {
+    from { transform: translateY(-20px); }
+    to { transform: translateY(100vh); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Will you be my gulab jamun? 😋</h1>
+    <div id="messageBox"></div>
+
+    <div class="buttons">
+        <button id="yesBtn">Yes 😌</button>
+        <button id="noBtn">No 😔</button>
+    </div>
+</div>
+
+<audio id="yaySound" preload="auto">
+  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_5e47b76e25.mp3">
+</audio>
+
+<script>
+let noCount = 0;
+const messages = [
+  "Are you sure? 🙂",
+  "Pakka pookie? 🎀🥺",
+  "Ayusshutupp and yes kro na 🫣"
+];
+
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const msg = document.getElementById("messageBox");
+const yay = document.getElementById("yaySound");
+
+/* ✨ Continuous glitter */
+setInterval(() => {
+    const g = document.createElement("div");
+    g.className = "glitter";
+    g.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(g);
+    setTimeout(() => g.remove(), 6000);
+}, 300);
+
+noBtn.onclick = () => {
+    if (noCount < 3) {
+        msg.textContent = messages[noCount];
+        noBtn.style.left = Math.random() * 70 + "%";
+        noBtn.style.top = Math.random() * 90 + "px";
+        yesBtn.style.transform = `scale(${1 + (noCount+1)*0.3})`;
+        noCount++;
+
+        if (noCount === 3) {
+            yesBtn.style.opacity = 1;
+            yesBtn.style.pointerEvents = "auto";
+        }
+    }
+};
+
+yesBtn.onclick = () => {
+    yay.currentTime = 0;
+    yay.play();
+    msg.textContent = "Aww... can I have you in my dinner? 👻";
+
+    for (let i = 0; i < 80; i++) {
+        const h = document.createElement("div");
+        h.className = "heart";
+        h.style.left = Math.random() * 100 + "vw";
+        document.body.appendChild(h);
+        setTimeout(() => h.remove(), 4000);
+    }
+};
+</script>
+
+</body>
+</html>
